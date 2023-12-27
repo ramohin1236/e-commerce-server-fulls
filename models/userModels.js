@@ -1,9 +1,9 @@
 // install mongodb snipped
 // !mdbg
-const mongoose = require('mongoose'); // Erase if already required
+const  mongoose = require('mongoose'); // Erase if already required
 
 // Declare the Schema of the Mongo model
-var userSchema = new mongoose.Schema({
+var userSchema =new mongoose.Schema({
     firstname:{
         type:String,
         required:true,
