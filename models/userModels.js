@@ -31,7 +31,15 @@ var userSchema =new mongoose.Schema({
     role:{
         type: String,
         default:"user"
-    }
+    },
+    cart:{
+        type: Array,
+        default: []
+    },
+    address: [{ type: mongoose.Schema.Types.ObjectId, ref: "Product" }],
+      wishlist: [{ type: mongoose.Schema.Types.ObjectId, ref: "Product" }],
+},{
+    timestamps: true,
 });
 
 // password bcrypted
