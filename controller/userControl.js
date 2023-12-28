@@ -49,4 +49,17 @@ const createUser = asyncHandler(async(req,res)=>{
         }
     })
 
-module.exports = {createUser,loginUser,getAllUser}
+    // get single user
+    const getSingleUser = asyncHandler(async(req,res)=>{
+        console.log(req.params);
+        const {id} =req.params
+        try{
+        const getUser = await User.findById(id)
+          res.json(getUser)
+        }
+        catch(error){
+            throw new Error(error)
+        }
+    })
+
+module.exports = {createUser,loginUser,getAllUser,getSingleUser}
