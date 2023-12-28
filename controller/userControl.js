@@ -1,3 +1,4 @@
+const { generateJwtToken } = require("../config/jwt");
 const User = require("../models/userModels");
 const asyncHandler = require('express-async-handler')
 
@@ -20,7 +21,15 @@ const createUser = asyncHandler(async(req,res)=>{
     //  cheak if user exists or not
     const findUser = await User.findOne({email})
     if(findUser && await findUser.isPasswordMatched(password) ){
-      res.json(findUser)
+      res.json({
+        _id: findUser._id,
+        firstname: findUser?.firstname,
+        lastname: findUser?.lastname,
+        email: findUser?.email,
+        mobile:findUser?.mobile,
+        token: generateJwtToken(findUser?._id)
+
+      })
     }
     else{
         throw new Error("Invaild Creadentials")
