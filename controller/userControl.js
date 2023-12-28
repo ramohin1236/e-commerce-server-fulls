@@ -15,7 +15,7 @@ const createUser = asyncHandler(async(req,res)=>{
    }
    })
 
-
+// login user
    const loginUser = asyncHandler(async(req,res)=>{
      const {email,password}= req.body;
     //  cheak if user exists or not
@@ -37,4 +37,16 @@ const createUser = asyncHandler(async(req,res)=>{
      console.log(email,password);
    })
 
-module.exports = {createUser,loginUser}
+// get all user
+ 
+    const getAllUser = asyncHandler(async(req,res)=>{
+        try{
+             const getallUser = await User.find();
+             res.json(getallUser)
+        }
+        catch(error){
+            throw new Error(error)
+        }
+    })
+
+module.exports = {createUser,loginUser,getAllUser}
