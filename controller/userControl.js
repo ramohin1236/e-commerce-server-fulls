@@ -2,6 +2,7 @@ const { generateJwtToken } = require("../config/jwt");
 const User = require("../models/userModels");
 const asyncHandler = require('express-async-handler')
 
+// create user
 const createUser = asyncHandler(async(req,res)=>{
     const email = req.body.email;
     const findUser= await User.findOne({email: email})
@@ -14,6 +15,29 @@ const createUser = asyncHandler(async(req,res)=>{
       throw new Error("User Already Exists")
    }
    })
+
+  //update user
+  const updateUser = asyncHandler(async(req,res)=>{
+    const {id}= req.params
+    try{
+      const updateUsers= await User.findByIdAndUpdate(id,
+        {
+        firstname: req?.body?.firstname,
+        lastname: req?.body?.lastname,
+        email: req?.body?.email,
+        mobile: req?.body?.mobile
+        },
+        {
+           new: true,
+        }
+      );
+      res.json(updateUsers)
+    }
+
+    catch(error){
+    throw new Error(error)
+    }
+  })
 
 // login user
    const loginUser = asyncHandler(async(req,res)=>{
@@ -38,8 +62,7 @@ const createUser = asyncHandler(async(req,res)=>{
    })
 
 // get all user
- 
-    const getAllUser = asyncHandler(async(req,res)=>{
+ const getAllUser = asyncHandler(async(req,res)=>{
         try{
              const getallUser = await User.find();
              res.json(getallUser)
@@ -74,4 +97,4 @@ const createUser = asyncHandler(async(req,res)=>{
         }
     })
 
-module.exports = {createUser,loginUser,getAllUser,getSingleUser,deleteUser}
+module.exports = {createUser,loginUser,getAllUser,getSingleUser,deleteUser,updateUser}
