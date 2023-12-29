@@ -3,7 +3,7 @@ const dbConnection = require('./config/dbConnection');
 const router = require('./routes/authRoutes');
 const bodyParser = require('body-parser');
 const { whenNotFound, errorHandlerr, } = require('./middlewears/erroHandler.jsx');
-
+const cookieParser = require('cookie-parser')
 
 
 
@@ -13,10 +13,7 @@ const PORT = process.env.PORT || 5000;
 
 dbConnection() 
 app.use(bodyParser.json())
-
-
-
-
+app.use(cookieParser())
 
 app.use(bodyParser.urlencoded({extended:false}))
 app.use(express.json())
