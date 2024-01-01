@@ -1,10 +1,11 @@
 const express = require('express');
 const dbConnection = require('./config/dbConnection');
 const router = require('./routes/authRoutes');
+const productRouter = require('./routes/productRoute')
 const bodyParser = require('body-parser');
 const { whenNotFound, errorHandlerr, } = require('./middlewears/erroHandler.jsx');
 const cookieParser = require('cookie-parser')
-
+const morgan = require('morgan')
 
 
 const app = express();
@@ -12,6 +13,7 @@ const dotenv = require("dotenv").config()
 const PORT = process.env.PORT || 5000;
 
 dbConnection() 
+app.use(morgan("dev"))
 app.use(bodyParser.json())
 app.use(cookieParser())
 
@@ -25,6 +27,7 @@ app.get('/', (req,res)=>{
 })
 
  app.use('/api/user', router)
+ app.use('/api/products', productRouter)
 
 
 // // middleware
