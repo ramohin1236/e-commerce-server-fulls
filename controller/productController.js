@@ -36,6 +36,23 @@ const updateProduct = asyncHandler(async (req, res) => {
       throw new Error(error);
     }
   });
+// update product
+
+const deleteProduct = asyncHandler(async (req, res) => {
+    const {id} = req.params;
+    // validateMongoDbId(id);
+    try {
+      if (req.body.title) {
+        req.body.slug = slugify(req.body.title);
+      }
+      const updateProduct = await Product.findOneAndDelete({ _id: id }, req.body, {
+        new: true,
+      });
+      res.json(updateProduct);
+    } catch (error) {
+      throw new Error(error);
+    }
+  });
 
 // find a single product
 const getaProduct = asyncHandler(async(req,res)=>{
@@ -65,5 +82,6 @@ module.exports={
     createProduct,
     getaProduct,
     getallProduct,
-    updateProduct
+    updateProduct,
+    deleteProduct
 }
