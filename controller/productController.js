@@ -67,9 +67,19 @@ const getaProduct = asyncHandler(async(req,res)=>{
 })
 // find a single product
 const getallProduct = asyncHandler(async(req,res)=>{
-     
+    //  console.log(req.query);
      try{
-        const findProduct = await Product.find()
+        const queryObj= {...req.query}
+        const exclusiveFields =["page", "sort", "limit", "fields"];
+     exclusiveFields.forEach((el)=>delete queryObj[el])
+        console.log(queryObj);
+
+        //sort by price gater then less then
+        let queryStr = JSON.stringify(queryObj)
+        queryStr= queryStr.replace(/\b(gte|gt|lte|lt|eq)\b/g, (match)=>`$${match}`)
+        const query = Product.find(JSON.parse(queryStr))
+    //    console.log(JSON.parse(queryStr));
+        const findProduct = await query
         res.json(findProduct)
      }
      catch(error){
