@@ -74,11 +74,32 @@ const getallProduct = asyncHandler(async(req,res)=>{
      exclusiveFields.forEach((el)=>delete queryObj[el])
         console.log(queryObj);
 
-        //sort by price gater then less then
+        //filter by price gater then less then
         let queryStr = JSON.stringify(queryObj)
         queryStr= queryStr.replace(/\b(gte|gt|lte|lt|eq)\b/g, (match)=>`$${match}`)
-        const query = Product.find(JSON.parse(queryStr))
-    //    console.log(JSON.parse(queryStr));
+       let query = Product.find(JSON.parse(queryStr))
+
+        //  sorting by alphabet 
+
+        if(req.query.sort){
+            const sortBy = req.query.sort.split(",").join(" ");
+            query = query.sort(sortBy)
+        }
+        else{
+            query = query.sort("-createdAt")
+        }
+
+        // limiting the fields
+          if(req.query.fields){
+            const fields = req.query.fields.split(",").join(" ");
+            query = query.select(fields)
+
+          }
+          else{
+            query = query.select("-__v")
+          }
+
+
         const findProduct = await query
         res.json(findProduct)
      }
