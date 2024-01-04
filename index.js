@@ -3,6 +3,7 @@ const dbConnection = require('./config/dbConnection');
 const router = require('./routes/authRoutes');
 const productRouter = require('./routes/productRoute')
 const blogRouter = require('./routes/blogRoutes')
+const categoryRouter = require('./routes/categoryRoute')
 const bodyParser = require('body-parser');
 const { whenNotFound, errorHandlerr, } = require('./middlewears/erroHandler.jsx');
 const cookieParser = require('cookie-parser')
@@ -30,6 +31,7 @@ app.get('/', (req,res)=>{
  app.use('/api/user', router)
  app.use('/api/products', productRouter)
  app.use('/api/blog', blogRouter)
+ app.use('/api/category', categoryRouter)
 
 
 // // middleware
