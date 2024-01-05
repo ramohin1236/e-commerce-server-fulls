@@ -6,6 +6,7 @@ const blogRouter = require('./routes/blogRoutes')
 const categoryRouter = require('./routes/categoryRoute')
 const blogCategory = require('./routes/blogCatRoutes')
 const brand = require('./routes/brandRoutes.js')
+const coupon = require('./routes/couponRoutes.js')
 const bodyParser = require('body-parser');
 const { whenNotFound, errorHandlerr, } = require('./middlewears/erroHandler.jsx');
 const cookieParser = require('cookie-parser')
@@ -36,6 +37,7 @@ app.get('/', (req,res)=>{
  app.use('/api/category', categoryRouter)
  app.use('/api/blog-category', blogCategory)
  app.use('/api/brand', brand)
+ app.use('/api/coupon', coupon)
 
 
 // // middleware
