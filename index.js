@@ -8,7 +8,7 @@ const blogCategory = require('./routes/blogCatRoutes')
 const brand = require('./routes/brandRoutes.js')
 const coupon = require('./routes/couponRoutes.js')
 const bodyParser = require('body-parser');
-const { whenNotFound, errorHandlerr, } = require('./middlewears/erroHandler.jsx');
+const { whenNotFound, errorHandlerr, } = require('./middlewears/erroHandler.js');
 const cookieParser = require('cookie-parser')
 const morgan = require('morgan')
 

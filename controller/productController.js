@@ -3,6 +3,8 @@ const Product = require("../models/productModels")
 const slugify = require('slugify');
 const validateMongoDbId = require('../utils/validateMongodb');
 const User = require('../models/userModels');
+const cloudinaryUploading = require('../utils/cloudinary');
+
 
 
 const createProduct = asyncHandler(async(req,res)=>{
@@ -197,6 +199,13 @@ const getallProduct = asyncHandler(async(req,res)=>{
      }
  })
 
+
+ const uploadImages= asyncHandler(async(req,res)=>{
+    
+        console.log(req.files);
+   
+})
+
  
 module.exports={
     createProduct,
@@ -205,5 +214,6 @@ module.exports={
     updateProduct,
     deleteProduct,
     addToWishList,
-    rating
+    rating,
+    uploadImages
 }
