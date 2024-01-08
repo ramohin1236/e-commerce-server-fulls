@@ -3,7 +3,7 @@ const Product = require("../models/productModels")
 const slugify = require('slugify');
 const validateMongoDbId = require('../utils/validateMongodb');
 const User = require('../models/userModels');
-const cloudinaryUploading = require('../utils/cloudinary');
+const cloudinaryUploadImg = require('../utils/cloudinary');
 
 
 
@@ -201,8 +201,35 @@ const getallProduct = asyncHandler(async(req,res)=>{
 
 
  const uploadImages= asyncHandler(async(req,res)=>{
+        const {id} = req.params;
+        validateMongoDbId(id)
+        
+        try{
+          const uploader =(path)=>cloudinaryUploadImg(path, 'images');
+          const urls= [];
+          const files = req.files;
+
+          for(const file of files){
+            const { path } = file;
+            // console.log(path);
+            const newPath = await uploader(path)
+            // console.log("newPath",newPath);
+            urls.push(newPath)
+          }
+          const findProduct = await Product.findByIdAndUpdate(id,{
+            images: urls.map((file)=>{
     
-        console.log(req.files);
+            return file
+            }),
+          },
+          {
+            new: true
+          });
+          res.json(findProduct)
+        }
+     catch(error){
+        throw new Error(error)
+     }
    
 })
 

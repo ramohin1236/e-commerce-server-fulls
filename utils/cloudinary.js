@@ -1,23 +1,40 @@
 const cloudinary = require('cloudinary')
 
 
-cloudinary.config({ 
-    cloud_name: process.env.CLOUDINARY_NAME, 
-    api_key: process.env.CLOUDINARY_API_KEY, 
-    api_secret: process.env.CLOUDINARY_API_SECRET
+
+// cloudinary.uploader.upload('your_file_path', { 
+//     api_key:"318899551875445",
+//     api_secret:"tufHt9eTcw7Mrp03IbvH3Wc_j1Y",
+//     timestamp: Math.round(new Date().getTime() / 1000)
+// }, function(error, result) { 
+//     console.log(result, error) 
+// });
+
+  cloudinary.config({ 
+    cloud_name:"dgzxzepc8", 
+    
+    api_key:"318899551875445", 
+    
+    api_secret:"tufHt9eTcw7Mrp03IbvH3Wc_j1Y",
+ 
   });
 
+  const cloudinaryUploadImg = async (fileToUploads) => {
+    return new Promise((resolve) => {
+         
 
-  const cloudinaryUploading = async(fileToUploads)=>{
-    return new Promise((reslove)=>{
-       cloudinary.uploader.upload(fileToUploads,(result)=>{
-        reslove({
+      cloudinary.uploader.upload(fileToUploads, (result) => {resolve(
+        // console.log("888",result),
+          {
             url: result.secure_url
-        },{
+          
+          },
+          {
             resource_type: "auto",
-        })
-       })
-    })
-  }
+          }
+        );
+      });
+    });
+  };
 
-  module.exports= cloudinaryUploading
+  module.exports= cloudinaryUploadImg
