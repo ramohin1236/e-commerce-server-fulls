@@ -4,7 +4,7 @@ const asyncHandler = require('express-async-handler');
 const validateMongoDbId = require("../utils/validateMongodb");
 const jwt = require('jsonwebtoken');
 const { generaterefreshToken } = require("../config/refreshToken");
-const sendEmail = require("./mailController");
+// const sendEmail = require("./mailController");
 
 
 // create user
@@ -177,6 +177,7 @@ const logout = asyncHandler(async (req, res) => {
             throw new Error(error)
         }
     })
+    
 
     // delete user
     const deleteUser = asyncHandler(async(req,res)=>{
@@ -251,6 +252,45 @@ const logout = asyncHandler(async (req, res) => {
        }
    })
 
+
+   
+
+   const getWishlist = asyncHandler(async (req, res) => {
+
+    const { id } = req.user;
+   
+    try {
+      const findUser = await User.findById(id).populate("wishlist");
+      res.json(findUser);
+    } catch (error) {
+      throw new Error(error);
+    }
+  });
+
+  // save user Address
+
+const saveAddress = asyncHandler(async (req, res, next) => {
+    const { _id } = req.user;
+    validateMongoDbId(_id);
+  
+    try {
+      const updatedUser = await User.findByIdAndUpdate(
+        _id,
+        {
+            address: req?.body?.address,
+        },
+        {
+          new: true,
+        }
+      );
+      res.json(updatedUser);
+    } catch (error) {
+      throw new Error(error);
+    }
+  
+  });
+  
+
 //    const forgotPassword = asyncHandler(async (req, res) => {
 //     const { email } = req.body;
 //     const user = await User.findOne({ email });
@@ -271,6 +311,9 @@ const logout = asyncHandler(async (req, res) => {
 //       throw new Error(error);
 //     }
 //   });
+
+// get wishlist
+
      
 
 module.exports = {
@@ -285,5 +328,7 @@ module.exports = {
     handleRefreshToken,
     logout,
     updatePassword,
-    loginAdmin
+    loginAdmin,
+    getWishlist,
+    saveAddress
 }
