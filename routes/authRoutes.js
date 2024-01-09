@@ -1,5 +1,5 @@
 const express = require('express')
-const { createUser,loginUser,getAllUser,getSingleUser,deleteUser,updateUser,blockUser, unblockUser, handleRefreshToken, logout,updatePassword} = require('../controller/userControl')
+const { createUser,loginUser,getAllUser,getSingleUser,deleteUser,updateUser,blockUser, unblockUser, handleRefreshToken, logout,updatePassword, loginAdmin} = require('../controller/userControl')
 const {authMiddleWare,isAdmin} = require('../middlewears/authMiddelware')
 const router = express.Router()
 
@@ -7,6 +7,7 @@ router.post("/register", createUser) // register user
 // router.post("/forgotpasword", forgotPassword) // register user
 router.put("/password",authMiddleWare, updatePassword)
 router.post("/login", loginUser) // login user
+router.post("/admin-login", loginAdmin) // login admin
 router.get("/all-users", getAllUser) //get all users
 router.get("/refresh", handleRefreshToken);
 router.get('/logout', logout)

@@ -1,6 +1,7 @@
 const blogModels = require("../models/blogModels");
 const Blog = require("../models/blogModels");
 const asyncHandler = require('express-async-handler');
+const fs = require('fs');
 const validateMongoDbId = require('../utils/validateMongodb');
 const cloudinaryUploadImg = require("../utils/cloudinary");
 
@@ -171,9 +172,7 @@ const liketheBlog = asyncHandler(async (req, res) => {
 
       for(const file of files){
         const { path } = file;
-        // console.log(path);
         const newPath = await uploader(path)
-        // console.log("newPath",newPath);
         urls.push(newPath)
         // fs.unlinkSync(path)
       }

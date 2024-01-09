@@ -216,7 +216,7 @@ const getallProduct = asyncHandler(async(req,res)=>{
             const newPath = await uploader(path)
             // console.log("newPath",newPath);
             urls.push(newPath)
-            // fs.unlinkSync(path)
+            fs.unlinkSync(path)
           }
           const findProduct = await Product.findByIdAndUpdate(id,{
             images: urls.map((file)=>{
