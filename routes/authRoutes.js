@@ -1,5 +1,5 @@
 const express = require('express')
-const { createUser,loginUser,getAllUser,getSingleUser,deleteUser,updateUser,blockUser, unblockUser, handleRefreshToken, logout,updatePassword, loginAdmin, getWishlist, saveAddress, userCart, getUserCart, emptyCart, applyCoupon} = require('../controller/userControl')
+const { createUser,loginUser,getAllUser,getSingleUser,deleteUser,updateUser,blockUser, unblockUser, handleRefreshToken, logout,updatePassword, loginAdmin, getWishlist, saveAddress, userCart, getUserCart, emptyCart, applyCoupon, createOrder} = require('../controller/userControl')
 const {authMiddleWare,isAdmin} = require('../middlewears/authMiddelware')
 const router = express.Router()
 
@@ -11,6 +11,7 @@ router.post("/admin-login", loginAdmin) // login admin
 router.post("/cart",authMiddleWare,userCart) 
 router.get("/cart",authMiddleWare,getUserCart) 
 router.post("/cart/apply-coupon",authMiddleWare,applyCoupon) 
+router.post("/cart/cash-order",authMiddleWare,createOrder) 
 
 
 
