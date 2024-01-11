@@ -1,5 +1,5 @@
 const express = require('express')
-const { createUser,loginUser,getAllUser,getSingleUser,deleteUser,updateUser,blockUser, unblockUser, handleRefreshToken, logout,updatePassword, loginAdmin, getWishlist, saveAddress, userCart, getUserCart, emptyCart, applyCoupon, createOrder} = require('../controller/userControl')
+const { createUser,loginUser,getAllUser,getSingleUser,deleteUser,updateUser,blockUser, unblockUser, handleRefreshToken, logout,updatePassword, loginAdmin, getWishlist, saveAddress, userCart, getUserCart, emptyCart, applyCoupon, createOrder, getOrders, updateOrderStatus} = require('../controller/userControl')
 const {authMiddleWare,isAdmin} = require('../middlewears/authMiddelware')
 const router = express.Router()
 
@@ -12,6 +12,7 @@ router.post("/cart",authMiddleWare,userCart)
 router.get("/cart",authMiddleWare,getUserCart) 
 router.post("/cart/apply-coupon",authMiddleWare,applyCoupon) 
 router.post("/cart/cash-order",authMiddleWare,createOrder) 
+router.get("/get-orders",authMiddleWare, getOrders) 
 
 
 
@@ -25,6 +26,7 @@ router.delete("/empty-cart",authMiddleWare,emptyCart ) //delete a user
 router.get("/:id", authMiddleWare,getSingleUser) //get a user
 router.delete("/:id", deleteUser) //delete a user
 
+router.put('/order/update-order/:id', authMiddleWare,isAdmin, updateOrderStatus)
 
 router.put("/:id", authMiddleWare, updateUser) //update a user
 
