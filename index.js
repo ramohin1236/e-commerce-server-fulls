@@ -13,7 +13,7 @@ const bodyParser = require('body-parser');
 const { whenNotFound, errorHandlerr, } = require('./middlewears/erroHandler.js');
 const cookieParser = require('cookie-parser')
 const morgan = require('morgan')
-
+const cors = require('cors')
 
 const app = express();
 const dotenv = require("dotenv").config()
@@ -21,6 +21,7 @@ const PORT = process.env.PORT || 5000;
 
 dbConnection() 
 app.use(morgan("dev"))
+app.use(cors())
 app.use(bodyParser.json())
 app.use(cookieParser())
 
