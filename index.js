@@ -1,4 +1,7 @@
 const express = require('express');
+const app = express();
+const dotenv = require("dotenv").config()
+const cors = require('cors')
 const dbConnection = require('./config/dbConnection');
 const router = require('./routes/authRoutes');
 const productRouter = require('./routes/productRoute')
@@ -14,10 +17,10 @@ const bodyParser = require('body-parser');
 const { whenNotFound, errorHandlerr, } = require('./middlewears/erroHandler.js');
 const cookieParser = require('cookie-parser')
 const morgan = require('morgan')
-const cors = require('cors')
 
-const app = express();
-const dotenv = require("dotenv").config()
+
+
+
 const PORT = process.env.PORT || 5000;
 
 dbConnection() 
@@ -25,7 +28,6 @@ app.use(morgan("dev"))
 app.use(cors())
 app.use(bodyParser.json())
 app.use(cookieParser())
-
 app.use(bodyParser.urlencoded({extended:false}))
 app.use(express.json())
 
