@@ -39,11 +39,22 @@ var productSchema = new mongoose.Schema({
     sold: {
         type: Number,
         default: 0,
-        select: false 
+        required: true,
+        // select: false 
     },
-    images: [],
+    images: [{
+ 
+        public_id: String,
+        url: String
+
+    }],
     color: [],
-    tags: [],
+    tags: {
+        type: String,
+        default: "",
+        required: true,
+        // select: false 
+    },
     ratings: [{
         star: Number,
         comment: String,

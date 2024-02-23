@@ -2,6 +2,7 @@ const express = require('express');
 const dbConnection = require('./config/dbConnection');
 const router = require('./routes/authRoutes');
 const productRouter = require('./routes/productRoute')
+const uploadRoute = require('./routes/uploadRoute')
 const blogRouter = require('./routes/blogRoutes')
 const categoryRouter = require('./routes/categoryRoute')
 const blogCategory = require('./routes/blogCatRoutes')
@@ -43,6 +44,7 @@ app.get('/', (req,res)=>{
  app.use('/api/coupon', coupon)
  app.use("/api/color", colorRouter);
  app.use("/api/enquiry", enqRouter);
+ app.use("/api/upload", uploadRoute);
 
 
 

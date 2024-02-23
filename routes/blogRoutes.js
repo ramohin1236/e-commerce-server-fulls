@@ -14,7 +14,8 @@ router.put('/likes',authMiddleWare,liketheBlog)
 router.put('/dis-likes',authMiddleWare,disliketheBlog)
 
 router.put('/:id',authMiddleWare,isAdmin,updateBlog )
-router.get('/get-all-blogs',authMiddleWare,isAdmin,getAllBlogs )
+router.get('/get-all-blogs',getAllBlogs )
+// router.get('/get-all-blogs',authMiddleWare,isAdmin,getAllBlogs )
 router.get('/:id',getBlogs)
 router.delete('/:id',authMiddleWare,isAdmin,deleteBlog)
 

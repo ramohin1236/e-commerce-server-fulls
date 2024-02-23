@@ -200,6 +200,10 @@ const getallProduct = asyncHandler(async(req,res)=>{
      }
  })
 
+//  const images = urls.map((file)=>{
+//     return file
+//  })
+//  res.josn(images)
 
  const uploadImages= asyncHandler(async(req,res)=>{
       
@@ -250,6 +254,5 @@ module.exports={
     deleteProduct,
     addToWishList,
     rating,
-    uploadImages,
-    deleteImages
+    uploadImages
 }
