@@ -1,5 +1,5 @@
 const express = require('express')
-const { createUser,loginUser,getAllUser,getSingleUser,deleteUser,updateUser,blockUser, unblockUser, handleRefreshToken, logout,updatePassword, loginAdmin, getWishlist, saveAddress, userCart, getUserCart, emptyCart, applyCoupon, createOrder, getOrders, updateOrderStatus, getAllUserOrders, getOrderByUserId} = require('../controller/userControl')
+const { createUser,loginUser,getAllUser,getSingleUser,deleteUser,updateUser,blockUser, unblockUser, handleRefreshToken, logout,updatePassword, loginAdmin, getWishlist, saveAddress, userCart, getUserCart, emptyCart, applyCoupon, createOrder, getOrders, updateOrderStatus, getAllUserOrders, getOrderByUserId, removeProductFromCart} = require('../controller/userControl')
 const {authMiddleWare,isAdmin} = require('../middlewears/authMiddelware')
 const router = express.Router()
 
@@ -25,6 +25,7 @@ router.get('/logout', logout)
 router.get('/wishlist',authMiddleWare, getWishlist)
 router.put("/save-address", authMiddleWare,saveAddress) //update a user
 router.delete("/empty-cart",authMiddleWare,emptyCart ) //delete a user
+router.delete("/delete-product-cart/:cartItemId",authMiddleWare,removeProductFromCart ) //delete a user
 
 router.get("/:id", authMiddleWare,getSingleUser) //get a user
 router.delete("/:id", deleteUser) //delete a user
