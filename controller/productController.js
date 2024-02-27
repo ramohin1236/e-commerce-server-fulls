@@ -62,7 +62,7 @@ const deleteProduct = asyncHandler(async (req, res) => {
 const getaProduct = asyncHandler(async(req,res)=>{
      const {id} = req.params
      try{
-        const findProduct = await Product.findById(id)
+        const findProduct = await Product.findById(id).populate("color")
         res.json(findProduct)
      }
      catch(error){
@@ -200,10 +200,6 @@ const getallProduct = asyncHandler(async(req,res)=>{
      }
  })
 
-//  const images = urls.map((file)=>{
-//     return file
-//  })
-//  res.josn(images)
 
  const uploadImages= asyncHandler(async(req,res)=>{
       
@@ -214,7 +210,7 @@ const getallProduct = asyncHandler(async(req,res)=>{
 
           for(const file of files){
             const { path } = file;
-            // console.log(path);
+   
             const newPath = await uploader(path)
            
             urls.push(newPath)
